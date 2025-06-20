@@ -3,9 +3,9 @@
 
 import React from 'react';
 import { Coffee, ShoppingCart } from 'lucide-react';
-import type { NavbarProps } from '../types';
+import type { NavbarProps } from '../src/types';
 
-const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange, cartItemsCount, onCartClick }) => {
+const Navbar: React.FC<NavbarProps> = ({ onPageChange, cartItemsCount, onCartClick }) => {
   return (
     <nav className="bg-white shadow-lg sticky top-0 z-50 border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

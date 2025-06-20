@@ -2,7 +2,7 @@
 // Updated HomePage with Add to Cart functionality
 
 import React, { useState } from 'react';
-import type { Product } from '../types';
+import type { Product } from '../src/types';
 import { products } from '../data/products';
 import ProductCard from './ProductCard';
 import ProductModal from './ProductModal';

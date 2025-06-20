@@ -3,7 +3,7 @@
 
 import React, { useState } from 'react';
 import { ShoppingCart, X } from 'lucide-react';
-import type { ProductModalProps } from '../types';
+import type { ProductModalProps } from '../src/types';
 
 const ProductModal: React.FC<ProductModalProps> = ({ product, isOpen, onClose, onAddToCart }) => {
   const [selectedRoast, setSelectedRoast] = useState<string>('');
@@ -121,7 +121,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, isOpen, onClose, o
                 <button 
                   onClick={handleAddToCart}
                   disabled={!selectedRoast || isAdding}
-                  className="w-full py-4 bg-amber-600 text-white rounded-xl hover:bg-amber-700 transition-colors font-semibold text-lg flex items-center justify-center space-x-3 disabled:bg-gray-300 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300"
+                  className="w-full py-4 bg-amber-600 text-white rounded-xl hover:bg-amber-700  font-semibold text-lg flex items-center justify-center space-x-3 disabled:bg-gray-300 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300"
                 >
                   {isAdding ? (
                     <>

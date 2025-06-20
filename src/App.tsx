@@ -9,7 +9,7 @@ import {
   CartModal,
   PaymentModal
 } from '../components/index';
-import type { Cart, CartItem, Product } from '../types';
+import type { Cart, CartItem, Product } from './types';
 
 // Main App Component
 const App: React.FC = () => {

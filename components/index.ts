@@ -25,4 +25,4 @@ export type {
   FormData,
   FormErrors,
   ValidationErrors
-} from '../types';
+} from '../src/types';

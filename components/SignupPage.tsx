@@ -1,7 +1,7 @@
 // File: src/components/SignupPage.tsx
 import React, { useState } from 'react';
 import { Coffee, Eye, EyeOff, CheckCircle, AlertCircle, Check, X, User, Mail, Lock } from 'lucide-react';
-import type { FormData, FormErrors, SignupPageProps } from '../types';
+import type { FormData, FormErrors, SignupPageProps } from '../src/types';
 
 const SignupPage: React.FC<SignupPageProps> = ({ onPageChange }) => {
   const [formData, setFormData] = useState<FormData>({

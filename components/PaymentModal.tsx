@@ -3,7 +3,7 @@
 
 import React, { useState } from 'react';
 import { X, CreditCard, Lock, CheckCircle } from 'lucide-react';
-import type { PaymentModalProps, PaymentFormData } from '../types/index';
+import type { PaymentModalProps, PaymentFormData } from '../src/types/index';
 
 const PaymentModal: React.FC<PaymentModalProps> = ({ 
   isOpen, 
@@ -242,7 +242,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({
             <button
               type="submit"
               disabled={isProcessing}
-              className="w-full py-4 bg-amber-600 text-white rounded-xl hover:bg-amber-700 transition-colors font-semibold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+              className="w-full py-4 bg-amber-600 text-white rounded-xl hover:bg-amber-700  font-semibold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
             >
               {isProcessing ? (
                 <>

@@ -1,4 +1,4 @@
-import type { Product } from '../types';
+import type { Product } from '../src/types';
 
 // Sample coffee products data
 export const products: Product[] = [

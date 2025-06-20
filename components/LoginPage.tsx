@@ -1,7 +1,7 @@
 // File: src/components/LoginPage.tsx
 import React, { useState } from 'react';
 import { Coffee, Eye, EyeOff, CheckCircle, AlertCircle, Mail, Lock } from 'lucide-react';
-import type { LoginFormData, FormErrors, LoginPageProps } from '../types';
+import type { LoginFormData, FormErrors, LoginPageProps } from '../src/types';
 
 const LoginPage: React.FC<LoginPageProps> = ({ onPageChange }) => {
   const [formData, setFormData] = useState<LoginFormData>({

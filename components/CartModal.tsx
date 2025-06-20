@@ -3,7 +3,7 @@
 
 import React from 'react';
 import { X, Plus, Minus, Trash2, ShoppingBag } from 'lucide-react';
-import type { CartModalProps } from '../types/index';
+import type { CartModalProps } from '../src/types/index';
 
 const CartModal: React.FC<CartModalProps> = ({ 
   isOpen, 

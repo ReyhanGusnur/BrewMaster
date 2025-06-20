@@ -1,5 +1,5 @@
 import React from 'react';
-import type { ProductCardProps } from '../types';
+import type { ProductCardProps } from '../src/types';
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, isHorizontal = false, onProductClick }) => {
   const cardClasses = isHorizontal 
