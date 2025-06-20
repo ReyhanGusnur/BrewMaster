@@ -108,7 +108,7 @@ export const products: Product[] = [
 - [Unsplash](https://unsplash.com) for coffee images
 - [Lucide](https://lucide.dev) for icons
 - [TailwindCSS](https://tailwindcss.com) for styling
-- [React](https://reactjs.org) team for the framework
+- [React](https://reactjs.org)  for the framework
 
 ---
 
