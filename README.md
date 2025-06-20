@@ -1,54 +1,115 @@
-# React + TypeScript + Vite
+# BrewMaster ☕
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern coffee e-commerce website built with React 19, TypeScript, and TailwindCSS.
 
-Currently, two official plugins are available:
+![BrewMaster](https://img.shields.io/badge/React-19.1.0-61DAFB?style=flat-square&logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.8.3-3178C6?style=flat-square&logo=typescript)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.1.10-38B2AC?style=flat-square&logo=tailwind-css)
+![Vite](https://img.shields.io/badge/Vite-6.0.5-646CFF?style=flat-square&logo=vite)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Premium Coffee Catalog** - Showcase of 8 high-quality coffee beans from around the world
+- **Interactive Product Cards** - Smooth hover animations with lift effects
+- **Product Details Modal** - Comprehensive coffee information with roasting options
+- **Responsive Design** - Optimized for all device sizes
+- **Authentication System** - Login and registration pages
+- **Modern UI/UX** - Clean design with professional animations
+- **TypeScript Support** - Full type safety throughout the application
+- **Component Architecture** - Well-organized and reusable components
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+##  Tech Stack
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- **React** 19.1.0 - Latest React with modern features
+- **TypeScript** 5.8.3 - Type safety and enhanced developer experience
+- **TailwindCSS** 4.1.10 - Utility-first CSS framework
+- **Vite** 6.0.5 - Lightning-fast build tool
+- **Lucide React** - Beautiful icon library
+
+## Prerequisites
+
+Before running this project, make sure you have:
+
+- Node.js (v18 or higher)
+- npm or yarn package manager
+
+## Quick Start
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/ReyhanGusnur/BrewMaster.git
+   cd BrewMaster
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**
+   ```bash
+   npm run dev
+   ```
+
+4. **Open your browser**
+   Navigate to `http://localhost:5173`
+
+## 🔧 Development
+
+### Component Guidelines
+
+- Use TypeScript for all components
+- Follow React functional component patterns
+- Implement proper prop typing
+- Use TailwindCSS for styling
+- Ensure accessibility with proper ARIA labels
+
+### Adding New Products
+
+Edit `src/data/products.ts`:
+
+```typescript
+export const products: Product[] = [
+  {
+    id: 9,
+    name: "New Coffee Origin",
+    price: 29.99,
+    image: "coffee-image-url",
+    description: "Coffee description...",
+    roastingOptions: ["Light", "Medium", "Dark"],
+    origin: "Country",
+    flavor: ["Flavor1", "Flavor2"]
+  }
+];
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Browser Support
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- Chrome 88+
+- Firefox 78+
+- Safari 14+
+- Edge 88+
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+##  Author
+
+**ReyhanGusnur**
+- GitHub: [@ReyhanGusnur](https://github.com/ReyhanGusnur)
+
+## Acknowledgments
+
+- [Unsplash](https://unsplash.com) for coffee images
+- [Lucide](https://lucide.dev) for icons
+- [TailwindCSS](https://tailwindcss.com) for styling
+- [React](https://reactjs.org) team for the framework
+
+---
+
+⭐ If you found this project helpful, please give it a star!
