@@ -1,32 +1,33 @@
+// File: src/components/ProductModal.tsx
+// Updated ProductModal with Add to Cart functionality
+
 import React, { useState } from 'react';
 import { ShoppingCart, X } from 'lucide-react';
 import type { ProductModalProps } from '../types';
 
-const ProductModal: React.FC<ProductModalProps> = ({ product, isOpen, onClose }) => {
+const ProductModal: React.FC<ProductModalProps> = ({ product, isOpen, onClose, onAddToCart }) => {
   const [selectedRoast, setSelectedRoast] = useState<string>('');
   const [quantity, setQuantity] = useState<number>(1);
+  const [isAdding, setIsAdding] = useState(false);
 
   if (!isOpen || !product) return null;
 
-  const handleRoastChange = (event: React.ChangeEvent<HTMLSelectElement>): void => {
-    setSelectedRoast(event.target.value);
-  };
-
-  const handleQuantityIncrease = (): void => {
-    setQuantity(prev => prev + 1);
-  };
-
-  const handleQuantityDecrease = (): void => {
-    setQuantity(prev => Math.max(1, prev - 1));
-  };
-
-  const handleAddToCart = (): void => {
+  const handleAddToCart = async () => {
     if (!selectedRoast) return;
-    // Add to cart logic here
-    console.log('Adding to cart:', { product, selectedRoast, quantity });
+    
+    setIsAdding(true);
+    
+    // Add a small delay for better UX
+    await new Promise(resolve => setTimeout(resolve, 500));
+    
+    onAddToCart(product, quantity, selectedRoast);
+    setIsAdding(false);
+    
+    // Reset form and close modal
+    setSelectedRoast('');
+    setQuantity(1);
+    onClose();
   };
-
-  const totalPrice = (product.price * quantity).toFixed(2);
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 backdrop-blur-sm">
@@ -40,7 +41,6 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, isOpen, onClose })
             <button 
               onClick={onClose}
               className="text-gray-400 hover:text-gray-600 text-2xl font-bold p-2 rounded-full hover:bg-gray-100 transition-all duration-300"
-              aria-label="Close modal"
             >
               <X size={24} />
             </button>
@@ -70,20 +70,23 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, isOpen, onClose })
               <p className="text-gray-600 leading-relaxed text-lg">{product.description}</p>
               
               <div>
-                <label htmlFor="roast-select" className="block text-lg font-semibold text-gray-800 mb-3">
-                  Roasting Level
+                <label className="block text-lg font-semibold text-gray-800 mb-3">
+                  Roasting Level *
                 </label>
                 <select 
-                  id="roast-select"
                   value={selectedRoast}
-                  onChange={handleRoastChange}
+                  onChange={(e) => setSelectedRoast(e.target.value)}
                   className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 text-lg"
+                  required
                 >
                   <option value="">Select roasting level</option>
                   {product.roastingOptions.map((option) => (
                     <option key={option} value={option}>{option}</option>
                   ))}
                 </select>
+                {!selectedRoast && (
+                  <p className="text-sm text-red-500 mt-1">Please select a roasting level</p>
+                )}
               </div>
 
               <div>
@@ -92,17 +95,15 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, isOpen, onClose })
                 </label>
                 <div className="flex items-center space-x-4">
                   <button 
-                    onClick={handleQuantityDecrease}
+                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
                     className="w-10 h-10 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition-colors"
-                    aria-label="Decrease quantity"
                   >
                     -
                   </button>
                   <span className="text-xl font-semibold w-8 text-center">{quantity}</span>
                   <button 
-                    onClick={handleQuantityIncrease}
+                    onClick={() => setQuantity(quantity + 1)}
                     className="w-10 h-10 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition-colors"
-                    aria-label="Increase quantity"
                   >
                     +
                   </button>
@@ -111,19 +112,28 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, isOpen, onClose })
               
               <div className="border-t pt-6">
                 <div className="flex items-center justify-between mb-6">
-                  <span className="text-3xl font-bold text-amber-600">${totalPrice}</span>
+                  <span className="text-3xl font-bold text-amber-600">${(product.price * quantity).toFixed(2)}</span>
                   <div className="text-right text-sm text-gray-500">
                     <p>${product.price} per bag</p>
                     <p>Free shipping on orders over $50</p>
                   </div>
                 </div>
                 <button 
-                  disabled={!selectedRoast}
                   onClick={handleAddToCart}
-                  className="w-full py-4 bg-amber-600 text-white rounded-xl hover:bg-amber-700 font-semibold text-lg flex items-center justify-center space-x-3 disabled:bg-gray-300 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300"
+                  disabled={!selectedRoast || isAdding}
+                  className="w-full py-4 bg-amber-600 text-white rounded-xl hover:bg-amber-700 transition-colors font-semibold text-lg flex items-center justify-center space-x-3 disabled:bg-gray-300 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300"
                 >
-                  <ShoppingCart className="w-6 h-6" />
-                  <span>Add to Cart</span>
+                  {isAdding ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                      <span>Adding to Cart...</span>
+                    </>
+                  ) : (
+                    <>
+                      <ShoppingCart className="w-6 h-6" />
+                      <span>Add to Cart</span>
+                    </>
+                  )}
                 </button>
               </div>
             </div>

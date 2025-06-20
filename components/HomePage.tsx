@@ -1,21 +1,23 @@
+// File: src/components/HomePage.tsx
+// Updated HomePage with Add to Cart functionality
+
 import React, { useState } from 'react';
 import type { Product } from '../types';
 import { products } from '../data/products';
 import ProductCard from './ProductCard';
 import ProductModal from './ProductModal';
 
-const HomePage: React.FC = () => {
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+interface HomePageProps {
+  onAddToCart: (product: Product, quantity: number, selectedRoast: string) => void;
+}
 
-  const handleProductClick = (product: Product): void => {
+const HomePage: React.FC<HomePageProps> = ({ onAddToCart }) => {
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleProductClick = (product: Product) => {
     setSelectedProduct(product);
     setIsModalOpen(true);
-  };
-
-  const handleModalClose = (): void => {
-    setIsModalOpen(false);
-    setSelectedProduct(null);
   };
 
   const verticalProducts = products.slice(0, 3);
@@ -83,7 +85,8 @@ const HomePage: React.FC = () => {
       <ProductModal 
         product={selectedProduct}
         isOpen={isModalOpen}
-        onClose={handleModalClose}
+        onClose={() => setIsModalOpen(false)}
+        onAddToCart={onAddToCart}
       />
     </div>
   );

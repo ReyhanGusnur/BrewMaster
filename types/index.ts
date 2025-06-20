@@ -1,4 +1,5 @@
-// Types for the coffee e-commerce application
+// File: src/types/index.ts
+// Types for the coffee e-commerce application with cart system and form validation
 
 export interface Product {
   id: number;
@@ -11,9 +12,25 @@ export interface Product {
   flavor: string[];
 }
 
+export interface CartItem {
+  id: string;
+  product: Product;
+  quantity: number;
+  selectedRoast: string;
+  totalPrice: number;
+}
+
+export interface Cart {
+  items: CartItem[];
+  totalItems: number;
+  totalPrice: number;
+}
+
 export interface NavbarProps {
   currentPage: string;
   onPageChange: (page: string) => void;
+  cartItemsCount: number;
+  onCartClick: () => void;
 }
 
 export interface ProductCardProps {
@@ -26,6 +43,29 @@ export interface ProductModalProps {
   product: Product | null;
   isOpen: boolean;
   onClose: () => void;
+  onAddToCart: (product: Product, quantity: number, selectedRoast: string) => void;
+}
+
+export interface CartModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  cart: Cart;
+  onUpdateQuantity: (itemId: string, newQuantity: number) => void;
+  onRemoveItem: (itemId: string) => void;
+  onCheckout: () => void;
+}
+
+export interface PaymentModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  cart: Cart;
+  onPaymentComplete: () => void;
+}
+
+// Form validation types
+export interface LoginFormData {
+  email: string;
+  password: string;
 }
 
 export interface FormData {
@@ -36,8 +76,23 @@ export interface FormData {
   confirmPassword: string;
 }
 
-// Page component props
-export interface HomePageProps {}
-export interface LoginPageProps {}
-export interface SignupPageProps {}
-export interface FooterProps {}
+export interface FormErrors {
+  [key: string]: string;
+}
+
+export interface ValidationErrors {
+  [key: string]: string;
+}
+
+export interface PaymentFormData {
+  email: string;
+  firstName: string;
+  lastName: string;
+  address: string;
+  city: string;
+  zipCode: string;
+  cardNumber: string;
+  expiryDate: string;
+  cvv: string;
+  cardName: string;
+}

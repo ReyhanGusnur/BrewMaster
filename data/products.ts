@@ -16,7 +16,7 @@ export const products: Product[] = [
     id: 2,
     name: "Colombian Supremo",
     price: 22.99,
-    image: "https://images.unsplash.com/photo-1587734195503-904fca47e0d9?w=400&h=400&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1527964275784-5ce8ddab3d8e??w=400&h=400&fit=crop&auto=format",
     description: "Full-bodied with rich chocolate and caramel notes. This premium Colombian coffee delivers a smooth, well-balanced cup with hints of nuts and citrus. Sourced from high-altitude farms in the Colombian Andes, each bean is carefully selected for its exceptional quality and flavor profile.",
     roastingOptions: ["Light Roast", "Medium Roast", "Dark Roast"],
     origin: "Colombia",
