@@ -1,9 +1,9 @@
 // File: src/components/LoginPage.tsx
 import React, { useState } from 'react';
 import { Coffee, Eye, EyeOff, CheckCircle, AlertCircle, Mail, Lock } from 'lucide-react';
-import type { LoginFormData, FormErrors } from '../types';
+import type { LoginFormData, FormErrors, LoginPageProps } from '../types';
 
-const LoginPage: React.FC = () => {
+const LoginPage: React.FC<LoginPageProps> = ({ onPageChange }) => {
   const [formData, setFormData] = useState<LoginFormData>({
     email: '',
     password: ''
@@ -115,12 +115,13 @@ const LoginPage: React.FC = () => {
         // Simulate successful login
         setIsSuccess(true);
         
-        // Reset form after 2 seconds
+        // Reset form after 2 seconds and go to home
         setTimeout(() => {
           setFormData({ email: '', password: '' });
           setTouched({});
           setErrors({});
           setIsSuccess(false);
+          onPageChange('home'); // Navigate to home after successful login
         }, 2000);
         
       } catch (error) {
@@ -155,6 +156,7 @@ const LoginPage: React.FC = () => {
           <CheckCircle className="h-16 w-16 text-green-500 mx-auto" />
           <h2 className="text-3xl font-bold text-gray-900">Welcome Back!</h2>
           <p className="text-gray-600">You have successfully logged in to your BrewMaster account.</p>
+          <p className="text-sm text-gray-500">Redirecting to home page...</p>
         </div>
       </div>
     );
@@ -334,9 +336,13 @@ const LoginPage: React.FC = () => {
           <div className="text-center">
             <p className="text-gray-600">
               Don't have an account?{' '}
-              <a href="#" className="text-amber-600 hover:text-amber-700 font-medium">
+              <button
+                type="button"
+                onClick={() => onPageChange('signup')}
+                className="text-amber-500 hover:text-amber-700 font-medium underline focus:outline-none focus:ring-2 focus:ring-amber-500 rounded"
+              >
                 Sign up here
-              </a>
+              </button>
             </p>
           </div>
         </form>

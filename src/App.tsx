@@ -1,6 +1,4 @@
 // File: src/App.tsx
-// Main App Component with Cart System
-
 import React, { useState } from 'react';
 import { 
   Navbar, 
@@ -10,7 +8,7 @@ import {
   Footer,
   CartModal,
   PaymentModal
-} from '../components';
+} from '../components/index';
 import type { Cart, CartItem, Product } from '../types';
 
 // Main App Component
@@ -99,16 +97,21 @@ const App: React.FC = () => {
   const handlePaymentComplete = () => {
     setIsPaymentModalOpen(false);
     setCart({ items: [], totalItems: 0, totalPrice: 0 });
-    // Optionally show a success message or redirect
-    alert('Thank you for your purchase! Your order has been confirmed.');
+    // Navigate to home after successful payment
+    setCurrentPage('home');
+  };
+
+  // Handle page change
+  const handlePageChange = (page: string) => {
+    setCurrentPage(page);
   };
 
   const renderPage = () => {
     switch (currentPage) {
       case 'login':
-        return <LoginPage />;
+        return <LoginPage onPageChange={handlePageChange} />;
       case 'signup':
-        return <SignupPage />;
+        return <SignupPage onPageChange={handlePageChange} />;
       default:
         return <HomePage onAddToCart={handleAddToCart} />;
     }
@@ -118,7 +121,7 @@ const App: React.FC = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar 
         currentPage={currentPage} 
-        onPageChange={setCurrentPage}
+        onPageChange={handlePageChange}
         cartItemsCount={cart.totalItems}
         onCartClick={() => setIsCartModalOpen(true)}
       />

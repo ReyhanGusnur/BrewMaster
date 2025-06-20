@@ -84,6 +84,15 @@ export interface ValidationErrors {
   [key: string]: string;
 }
 
+// Page props with navigation
+export interface LoginPageProps {
+  onPageChange: (page: string) => void;
+}
+
+export interface SignupPageProps {
+  onPageChange: (page: string) => void;
+}
+
 export interface PaymentFormData {
   email: string;
   firstName: string;

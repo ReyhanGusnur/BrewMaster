@@ -1,9 +1,9 @@
 // File: src/components/SignupPage.tsx
 import React, { useState } from 'react';
 import { Coffee, Eye, EyeOff, CheckCircle, AlertCircle, Check, X, User, Mail, Lock } from 'lucide-react';
-import type { FormData, FormErrors } from '../types';
+import type { FormData, FormErrors, SignupPageProps } from '../types';
 
-const SignupPage: React.FC = () => {
+const SignupPage: React.FC<SignupPageProps> = ({ onPageChange }) => {
   const [formData, setFormData] = useState<FormData>({
     firstName: '',
     lastName: '',
@@ -158,7 +158,7 @@ const SignupPage: React.FC = () => {
         // Simulate successful registration
         setIsSuccess(true);
         
-        // Reset form after 3 seconds
+        // Reset form after 3 seconds and go to login
         setTimeout(() => {
           setFormData({
             firstName: '',
@@ -170,6 +170,7 @@ const SignupPage: React.FC = () => {
           setTouched({});
           setErrors({});
           setIsSuccess(false);
+          onPageChange('login'); // Navigate to login after successful signup
         }, 3000);
         
       } catch (error) {
@@ -228,6 +229,7 @@ const SignupPage: React.FC = () => {
           <CheckCircle className="h-16 w-16 text-green-500 mx-auto" />
           <h2 className="text-3xl font-bold text-gray-900">Welcome to BrewMaster!</h2>
           <p className="text-gray-600">Your account has been created successfully. Welcome to the coffee community!</p>
+          <p className="text-sm text-gray-500">Redirecting to login page...</p>
         </div>
       </div>
     );
@@ -267,7 +269,7 @@ const SignupPage: React.FC = () => {
                 First Name
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center cursor-pointer">
                   <User className="h-5 w-5 text-gray-400" />
                 </div>
                 <input
@@ -548,9 +550,13 @@ const SignupPage: React.FC = () => {
           <div className="text-center">
             <p className="text-gray-600">
               Already have an account?{' '}
-              <a href="#" className="text-amber-600 hover:text-amber-700 font-medium">
+              <button
+                type="button"
+                onClick={() => onPageChange('login')}
+                className="text-amber-500 hover:text-amber-700 font-medium underline focus:outline-none focus:ring-2 focus:ring-amber-500 rounded"
+              >
                 Sign in here
-              </a>
+              </button>
             </p>
           </div>
         </form>
